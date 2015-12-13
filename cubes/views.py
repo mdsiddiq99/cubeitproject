@@ -79,7 +79,7 @@ def create_cube_content(request, user_id, cube_id):
 		return HttpResponse(json.dumps(resp), content_type = 'application/json')
 
 	try:
-		cube = UserCube.objects.get(id = cube_id, user = user_profile)
+		cube = UserCube.objects.get(cube_id = cube_id, user = user_profile)
 	except Exception, e:
 		resp['status'] = 'failed'
 		resp['status_code'] = 400
@@ -168,7 +168,7 @@ def delete_cube(request, user_id, cube_id):
 		return HttpResponse(json.dumps(resp), content_type = 'application/json')
 
 	try:
-		cube = UserCube.objects.get(id = cube_id, user = user_profile)
+		cube = UserCube.objects.get(cube_id = cube_id, user = user_profile)
 	except Exception, e:
 		resp['status'] = 'failed'
 		resp['status_code'] = 400
