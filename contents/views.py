@@ -19,7 +19,7 @@ def get_or_create_contents(request, user_id):
 		return HttpResponse(json.dumps(resp), content_type = 'application/json')
 
 	if request.method == 'POST':
-		link = request.POST.get('link')
+		link = json.loads(request.body).get('link')
 		if not link:
 			resp['status'] = 'failed'
 			resp['status_code'] = 400
@@ -90,7 +90,7 @@ def share_content(request, user_id, content_id):
 		resp['status_code'] = 400
 		resp['message'] = 'Content does not exist'
 		return HttpResponse(json.dumps(resp), content_type = 'application/json')
-	share_with_user_id = request.POST.get('user_id')
+	share_with_user_id = json.loads(request.body).get('user_id')
 	if not share_with_user_id:
 		resp['status'] = 'failed'
 		resp['status_code'] = 400

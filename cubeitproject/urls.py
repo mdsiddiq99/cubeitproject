@@ -27,11 +27,11 @@ urlpatterns = patterns('',
     # list all contents
     url(r'^user/(?P<user_id>[0-9]+)/content/$', 'contents.views.get_or_create_contents'),
     # create cube content
-    url(r'^user/(?P<user_id>[0-9]+)/cube/(?P<cube_id>[0-9]+)/content/$', 'cubes.views.create_cube_content'),
+    url(r'^user/(?P<user_id>[0-9]+)/cube/(?P<cube_id>[0-9]+)/content$', 'cubes.views.create_cube_content'),
     # delete cube content
-    url(r'^user/(?P<user_id>[0-9]+)/cube/(?P<cube_id>[0-9]+)/content/(?P<content_id>[0-9]+)/$', 'cubes.views.delete_cube_content'),
+    url(r'^user/(?P<user_id>[0-9]+)/cube/(?P<cube_id>[0-9]+)/content/(?P<content_id>[0-9]+)$', 'cubes.views.delete_cube_content'),
     # delete cube
-    url(r'^user/(?P<user_id>[0-9]+)/cube/(?P<cube_id>[0-9]+)/$', 'cubes.views.delete_cube'),
+    url(r'^user/(?P<user_id>[0-9]+)/cube/(?P<cube_id>[0-9]+)$', 'cubes.views.delete_cube'),
     # share cube
     url(r'^user/(?P<user_id>[0-9]+)/cube/(?P<cube_id>[0-9]+)/share/$', 'cubes.views.share_cube'),
     # share content

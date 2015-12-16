@@ -13,9 +13,9 @@ def create_user(request):
 		resp['status_code'] = 400
 		resp['message'] = 'Only POST allowed'
 		return HttpResponse(json.dumps(resp), content_type = 'application/json')
-
-	name = request.POST.get('name', '')
-	city = request.POST.get('city', '')
+	_post_data = json.loads(request.body)
+	name = _post_data.get('name', '')
+	city = _post_data.get('city', '')
 	errors = []
 	if not name:
 		errors.append('name required')

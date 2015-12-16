@@ -19,7 +19,7 @@ def get_or_create_cubes(request, user_id):
 		return HttpResponse(json.dumps(resp), content_type = 'application/json')
 
 	if request.method == 'POST':
-		name = request.POST.get('name')
+		name = json.loads(request.body).get('name')
 		if not name:
 			resp['status'] = 'failed'
 			resp['status_code'] = 400
@@ -64,6 +64,7 @@ def get_or_create_cubes(request, user_id):
 @csrf_exempt
 def create_cube_content(request, user_id, cube_id):
 	resp = {}
+	print request.method
 	if request.method != 'POST':
 		resp['status'] = 'failed'
 		resp['status_code'] = 400
@@ -86,7 +87,7 @@ def create_cube_content(request, user_id, cube_id):
 		resp['message'] = 'Cube does not exist'
 		return HttpResponse(json.dumps(resp), content_type = 'application/json')
 
-	content_id = request.POST.get('content_id')
+	content_id = json.loads(request.body).get('content_id')
 	if not content_id:
 		resp['status'] = 'failed'
 		resp['status_code'] = 400
@@ -117,6 +118,7 @@ def create_cube_content(request, user_id, cube_id):
 	resp['message'] = 'successfully added content to cube'
 	return HttpResponse(json.dumps(resp), content_type = 'application/json')
 
+@csrf_exempt
 def delete_cube_content(request, user_id, cube_id, content_id):
 	resp = {}
 	try:
@@ -157,6 +159,7 @@ def delete_cube_content(request, user_id, cube_id, content_id):
 	resp['message'] = 'successfully deleted content from cube'
 	return HttpResponse(json.dumps(resp), content_type = 'application/json')
 
+@csrf_exempt
 def delete_cube(request, user_id, cube_id):
 	resp = {}
 	try:
@@ -211,7 +214,7 @@ def share_cube(request, user_id, cube_id):
 		resp['status_code'] = 400
 		resp['message'] = 'Cube does not exist'
 		return HttpResponse(json.dumps(resp), content_type = 'application/json')
-	share_with_user_id = request.POST.get('user_id')
+	share_with_user_id = json.loads(request.body).get('user_id')
 	if not share_with_user_id:
 		resp['status'] = 'failed'
 		resp['status_code'] = 400
